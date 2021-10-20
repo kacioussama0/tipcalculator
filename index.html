@@ -303,7 +303,7 @@ buttons.addEventListener('click',function(e){
 })
 
 setInterval(()=> {
-  if(bill.value != "" && percente != null &&  people.value != ""){
+  if(bill.value != "" && percente != null &&  (people.value != ""  || people.value != "0")){
       tip.innerHTML = `$${((Number(bill.value) * (Number(percente) / 100) / Number(people.value)).toFixed(2))}`;
       total.innerHTML = `$${((((Number(bill.value) * (Number(percente) / 100) / Number(people.value)) * Number(people.value))+Number(bill.value)) / Number(people.value)).toFixed(2)}`;
       reset.style.backgroundColor = "#26c2ad";
