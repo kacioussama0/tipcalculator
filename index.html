@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Tip calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    * {
+      font-family: 'Space Mono', monospace;
+    }
+    body {
+
+      background-color: #c5e4e7;
+    }
+    #logo {
+      display: block;
+      margin: 50px auto;
+    }
+    div.container {
+        width: 1000px;
+        height: 500px;
+        background-color: #fff;
+        margin: 15px auto;
+
+
+        border-radius: 15px;
+        padding: 20px;
+        display: flex;
+
+    }
+    div.container div {
+        width: 50%;
+        margin: 15px;
+    }
+    div.container h2 {
+      font-size: 18Px;
+      color: #6f7b7b;
+    }
+    #bill {
+      background-image: url("images/icon-dollar.svg");
+      background-repeat: no-repeat;
+      background-position: 1% center;
+
+    }
+    #people {
+      background-image: url("images/icon-person.svg");
+      background-repeat: no-repeat;
+      background-position: 1% center;
+
+    }
+    input[type=number] {
+      display: block;
+      width: 95%;
+      height: 40px;
+      font-size : 24px;
+      background-color: #f3f8fb;
+      border:none;
+      border-radius: 5Px;
+      text-align: right;
+      padding-right: 15px;
+      padding-left: 15px;
+      color: #275056;
+      font-weight: bold;
+    }
+    input[type=number]::placeholder {
+      color: #c3d7d6;
+    }
+
+    input[type=number]:focus {
+     outline: none;
+      border: 2px solid #1dbfa7;
+    }
+    span.button {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    span.button input {
+        width: calc((100% - 90px)/3);
+        height: 45px;
+        margin:15px 25px 15px 0px;
+        background-color: #00474b;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.6s;
+    }
+    span.button input:hover {
+      background-color: #26c2ad !important;
+      color: #00474b !important;
+    }
+    #custom {
+      background-color: #f3f8fb !important;
+      color: #00474b !important;
+      text-align: center;
+      transition: none;
+
+    }
+    input[type=text]{
+      text-align: right;
+    }
+    #custom:focus {
+      border: 1px solid #1dbfa7;
+      outline: none;
+    }
+    div.result {
+      position: relative;
+      background-color: #00474b;
+      display: flex;
+      flex-direction: column;
+      border-radius: 15px;
+
+    }
+    div.result span h4 {
+      display: inline-block;
+      margin-top: 55px;
+      color: #fff;
+      margin-left: 15px;
+      position: relative;
+    }
+    div.result span h4::after {
+        content:"/person";
+      position: absolute;
+      bottom: -25px;
+      left: 1px;
+      color: #6ea5aa;
+    }
+    div.result span p {
+      display: inline-block;
+      float: right;
+      margin-left: 50px;
+      margin-right: 50px;
+      color: #1dbfa7;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    #reset {
+      width: 85%;
+      height: 50px;
+      border:none;
+      display: block;
+      margin: 70px auto;
+      background-color: #0d686d;
+      color: #055d61;
+      border-radius: 5px;
+      font-size: 18px;
+      position: absolute;
+      bottom: -20px;
+      left: 35px;
+    }
+      .people  {
+        display: block;
+        margin-top: 50px;
+      }
+      #p {
+        display: inline-block;
+        position: relative;
+      }
+      .proh {
+        display: inline-block;
+        position: absolute;
+        bottom: -25px;
+        left: 480px;
+
+       visibility: hidden;
+        color: red;
+        text-align: right;
+      }
+    @media (max-width: 767px) {
+      div.container {
+        width: 90%;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        flex-direction: column;
+
+
+      }
+
+      div.container div {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      div.result {
+        height: 400px;
+      }
+     #tip , #total {
+       margin-right: 15px;
+     }
+      span.total p {
+        margin-left: auto;
+      }
+      span.button {
+        justify-content: center;
+        align-items: center;
+      }
+      #reset {
+        left: 7%;
+      }
+      span.button input {
+        width: calc((100% - 90px) / 2);
+
+      }
+      input[type=number]{
+        width: 90%;
+
+      }
+    }
+
+  </style>
+</head>
+<body>
+<img src="images/logo.svg" alt="" id="logo"/>
+  <div class="container">
+    <div class="calculation">
+      <h2>Bill</h2>
+      <input type="number" name="" id="bill" placeholder="0" min="0" />
+      <h2>Select Tip %</h2>
+      <span class="button">
+        <input type="button" value="5">
+        <input type="button" value="10">
+        <input type="button" value="15">
+        <input type="button" value="25">
+        <input type="button" value="50">
+        <input type="button" value="Custom" id="custom">
+
+      </span>
+      <span class="people">
+      <h2 id="p">Number Of People</h2>
+        <span class="proh">Can't be zero</span>
+      <input type="number" name="" id="people" placeholder="0" min="0">
+      </span>
+    </div>
+    <div class="result">
+      <span class="tipAmount">
+        <h4>Tip Amount</h4>
+        <p id="tip">$0.00</p>
+      </span>
+      <span class="total">
+        <h4>Total</h4>
+        <p id="total">$0.00</p>
+      </span>
+      <button id="reset">RESET</button>
+    </div>
+
+
+
+  </div>
+
+<script>
+let bill = document.querySelector("#bill");
+let people = document.querySelector("#people");
+let percente = null;
+let tip = document.querySelector("#tip");
+let total = document.querySelector("#total");
+let reset = document.querySelector("#reset");
+document.querySelector("#custom").onblur = function () {
+    if(document.querySelector("#custom").value == ""){
+      document.querySelector("#custom").type = "button";
+      document.querySelector("#custom").value = "Custom";
+    }
+
+}
+let buttons = document.querySelector(".button");
+
+buttons.addEventListener('click',function(e){
+  if(!e.target.matches('input')){return false;}
+
+
+ if(e.target.id == 'custom'){
+    if(e.target.value == ""){
+        e.target.type = "button";
+        e.target.value = "Custom";
+     }
+    else {
+      e.target.type = "text";
+      e.target.value = "";
+
+    }
+   e.target.onchange = function (){
+     percente = e.target.value;
+   }
+  }
+  for(let i = 1 ; i <= 5 ; i++) {
+    document.getElementsByTagName("input")[i].style.backgroundColor = "#00474b";
+    document.getElementsByTagName("input")[i].style.color = "#fff";
+
+  }
+
+    e.target.style.backgroundColor = "#26c2ad";
+    e.target.style.color = "#00474b";
+    percente = e.target.value;
+})
+
+setInterval(()=> {
+  if(bill.value != "" && percente != null &&  people.value != ""){
+      tip.innerHTML = `$${((Number(bill.value) * (Number(percente) / 100) / Number(people.value)).toFixed(2))}`;
+      total.innerHTML = `$${((((Number(bill.value) * (Number(percente) / 100) / Number(people.value)) * Number(people.value))+Number(bill.value)) / Number(people.value)).toFixed(2)}`;
+      reset.style.backgroundColor = "#26c2ad";
+      reset.style.color = "#00474b";
+      reset.style.fontWeight = "bold";
+      reset.style.cursor = "pointer";
+  }
+  else {
+    reset.onclick = function () {
+      bill.value = "";
+      bill.style.border = "none";
+      people.value ="";
+      people.style.border = "none";
+      for(let i = 1 ; i <= 5 ; i++) {
+        document.getElementsByTagName("input")[i].style.backgroundColor = "#00474b";
+        document.getElementsByTagName("input")[i].style.color = "#fff";
+      }
+      tip.innerHTML = `$0.00`;
+      total.innerHTML = `$0.00`;
+      reset.style.backgroundColor = "#0d686d";
+      reset.style.color = "#055d61";
+      reset.style.fontWeight = "bold";
+      reset.style.cursor = "default";
+      document.querySelector("#custom").value = "Custom";
+      document.querySelector("#custom").type = "button";
+
+    }
+
+  }
+},500)
+people.onchange = function () {
+    if(this.value == "0"){
+      this.autofocus;
+      document.querySelector(".proh").style.visibility = "visible";
+      this.style.border = "2px solid red";
+
+
+    }
+    else if (this.value == ""){
+      document.querySelector(".proh").style.visibility = "hidden";
+      this.style.border = "none";
+
+    }
+    else {
+      document.querySelector(".proh").style.visibility = "hidden";
+      this.style.border = "2px solid #58a89d";
+
+    }
+}
+bill.onchange = function () {
+
+   if (this.value == "")
+    this.style.border = "none";
+
+  else
+    this.style.border = "2px solid #58a89d";
+
+}
+
+
+</script>
+
+  </div>
+</body>
+</html>
